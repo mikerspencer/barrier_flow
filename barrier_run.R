@@ -21,7 +21,7 @@ barrier.model() %>%
 # Probabilistic run
 
 params = list(barrier = 5:15,
-              cars = 1:20,
+              cars = 15,
               cars.speed = 10:20)
 params = expand.grid(params)
 
@@ -35,3 +35,11 @@ x = lapply(1:nrow(params), function(i){
 })
 x = do.call("rbind.data.frame", x)
 
+library(viridis)
+
+ggplot(x, aes(time, cars.queue)) +
+   stat_density_2d(geom="raster",
+                   aes(fill=..density..),
+                   contour=F) +
+   scale_fill_viridis() +
+   theme_linedraw()
