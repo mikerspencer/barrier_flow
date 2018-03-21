@@ -15,7 +15,7 @@ barrier.model = function(barrier = 10,
    cars.flow = 2 + 4 / (cars.speed * 16/36)
    
    # Queue growing
-   x = 0:(cars.flow * 12)
+   x = 0:(cars.flow * cars * 1.5)
    x = data.frame(time=x,
                   cars.queue=floor(x / cars.flow) - floor(x / barrier),
                   cars.carpark=floor(x / barrier))
