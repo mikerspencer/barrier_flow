@@ -37,9 +37,17 @@ x = do.call("rbind.data.frame", x)
 
 library(viridis)
 
-ggplot(x, aes(time, cars.queue)) +
+x %>% 
+   gather(variable, value, -time, -run) %>% 
+   ggplot(aes(time, value)) +
    stat_density_2d(geom="raster",
                    aes(fill=..density..),
                    contour=F) +
-   scale_fill_viridis(option="magma") +
-   theme_linedraw()
+   scale_fill_viridis(option="magma", labels=scales::percent_format()) +
+   facet_wrap(~ variable) +
+   theme_linedraw() +
+   labs(title="Probabilistic simulation of cars passing a barrier",
+        subtitle="Barrier time: 5 to 15 seconds\nCars: 15\nCar speed: 10-20 mph",
+        x="Time (seconds)",
+        y="Number of cars",
+        fill="Model runs")
