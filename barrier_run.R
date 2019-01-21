@@ -41,5 +41,5 @@ ggplot(x, aes(time, cars.queue)) +
    stat_density_2d(geom="raster",
                    aes(fill=..density..),
                    contour=F) +
-   scale_fill_viridis() +
+   scale_fill_viridis(option="magma") +
    theme_linedraw()
